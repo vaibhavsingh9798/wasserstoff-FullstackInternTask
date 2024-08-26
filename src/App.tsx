@@ -17,6 +17,7 @@ const App: React.FC = () => {
     try {
       if(!toggle)
      setLoading(true)
+    setError('')
       const apiKey = '537e6051c563f91736440dbf264b012e';
       const currentResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit === 'C' ? 'metric' : 'imperial'}&appid=${apiKey}`);
       const forecastResponse = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${unit === 'C' ? 'metric' : 'imperial'}&appid=${apiKey}`);
