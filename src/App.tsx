@@ -10,9 +10,12 @@ const App: React.FC = () => {
   const [currentWeather, setCurrentWeather] = useState<any>(null);
   const [forecast, setForecast] = useState<any[]>([]);
   const [unit, setUnit] = useState<string>('C');
-
+  const [error,setError] = useState<string>('')
+  const [loading,setLoading] = useState<boolean>(false)
+ 
   const fetchWeatherData = async (city: string) => {
     try {
+     setLoading(true)
       const apiKey = '537e6051c563f91736440dbf264b012e';
       const currentResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit === 'C' ? 'metric' : 'imperial'}&appid=${apiKey}`);
       const forecastResponse = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${unit === 'C' ? 'metric' : 'imperial'}&appid=${apiKey}`);
@@ -38,7 +41,9 @@ const App: React.FC = () => {
 
       setForecast(dailyForecast);
     } catch (error) {
-      console.error(error);
+      setError('Weather data not found. Please check the location.')
+    }finally{
+       setLoading(false)
     }
   };
 
@@ -53,8 +58,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 bg-slate-900 text-slate-300 min-h-screen">
       <WeatherForm onSearch={handleSearch} />
+      {loading && <div className='flex justify-center text-3xl '>Loading....</div>}
       {currentWeather && (
         <>
           <WeatherCurrent data={currentWeather}  />
@@ -62,6 +68,7 @@ const App: React.FC = () => {
         </>
       )}
       {forecast.length > 0 && <WeatherForecast forecast={forecast} unit={unit} />}
+      {error && <div className='flex justify-center items-end text-red-500'>{error}</div>}
     </div>
   );
 };

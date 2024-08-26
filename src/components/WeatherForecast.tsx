@@ -30,7 +30,6 @@ const WeatherForecast: React.FC<WeatherForecastProps> = ({ forecast, unit }) => 
         <div key={index} className="p-4 border border-gray-300 rounded">
           <div className="font-bold">
             {formatDate(item.date)}
-            {/* {(new Date(item.date), 'eeee, MMMM d')} */}
           </div>
           <img src={`http://openweathermap.org/img/wn/${item.weatherIcon}.png`} alt={item.weatherDescription} />
           <p>{item.weatherDescription}</p>
