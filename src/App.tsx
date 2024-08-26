@@ -13,8 +13,9 @@ const App: React.FC = () => {
   const [error,setError] = useState<string>('')
   const [loading,setLoading] = useState<boolean>(false)
  
-  const fetchWeatherData = async (city: string) => {
+  const fetchWeatherData = async (city: string, toggle? : boolean) => {
     try {
+      if(!toggle)
      setLoading(true)
       const apiKey = '537e6051c563f91736440dbf264b012e';
       const currentResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit === 'C' ? 'metric' : 'imperial'}&appid=${apiKey}`);
@@ -54,7 +55,7 @@ const App: React.FC = () => {
 
   const toggleUnit = () => {
     setUnit(prevUnit => (prevUnit === 'C' ? 'F' : 'C'));
-    fetchWeatherData(city)
+    fetchWeatherData(city,true)
   };
 
   return (
