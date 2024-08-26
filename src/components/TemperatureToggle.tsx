@@ -7,8 +7,8 @@ interface TemperatureToggleProps {
 
 const TemperatureToggle: React.FC<TemperatureToggleProps> = ({ unit, onToggle }) => {
   return (
-    <button onClick={onToggle} className="p-2 mt-4  rounded bg-slate-700">
-      Switch to °{unit === 'C' ? 'F' : 'C'}
+    <button onClick={onToggle} className="p-3 my-3  text-2xl font-bold  rounded bg-slate-500">
+       °{unit === 'C' ? 'F' : 'C'}
     </button>
   );
 };

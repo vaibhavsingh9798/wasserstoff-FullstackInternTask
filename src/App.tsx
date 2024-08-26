@@ -37,8 +37,8 @@ const App: React.FC = () => {
           temperature: Math.round(item.main.temp),
           weatherDescription: item.weather[0].description,
           weatherIcon: item.weather[0].icon,
+          unit : unit
         }));
-
       setForecast(dailyForecast);
     } catch (error) {
       setError('Weather data not found. Please check the location.')
@@ -59,15 +59,18 @@ const App: React.FC = () => {
 
   return (
     <div className="p-4 bg-slate-900 text-slate-300 min-h-screen">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-center">
+        WeatherVista
+      </h1>
       <WeatherForm onSearch={handleSearch} />
       {loading && <div className='flex justify-center text-3xl '>Loading....</div>}
       {currentWeather && (
         <>
-          <WeatherCurrent data={currentWeather}  />
+          <WeatherCurrent data={currentWeather} />
           <TemperatureToggle unit={unit} onToggle={toggleUnit} />
         </>
       )}
-      {forecast.length > 0 && <WeatherForecast forecast={forecast} unit={unit} />}
+      {forecast.length > 0 && <WeatherForecast forecast={forecast}  />}
       {error && <div className='flex justify-center items-end text-red-500'>{error}</div>}
     </div>
   );

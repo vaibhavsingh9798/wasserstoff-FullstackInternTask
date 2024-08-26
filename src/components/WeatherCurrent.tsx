@@ -11,13 +11,14 @@ interface WeatherCurrentProps {
     weatherIcon: string;
     unit: string;
   };
+  
 }
 
 const WeatherCurrent: React.FC<WeatherCurrentProps> = ({ data }) => {
   const { temperature, minTemperature, maxTemperature, humidity, windSpeed, weatherDescription, weatherIcon, unit } = data;
 
   return (
-    <div className="p-4 border border-gray-300 rounded">
+    <div className="p-4 border border-gray-600 rounded">
       <div className="text-xl font-bold">
         {temperature}°{unit}
       </div>
